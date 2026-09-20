@@ -12,6 +12,10 @@
 
 ---
 
+> **Implementation status:** this repository contains architecture documentation and MBSE assets. The catalog expansion below is a proposal, not a running integrated stack. APIs, directory layouts, example metrics and deployment profiles are illustrative until implemented and tested. Source review: 2026-09-20.
+>
+> **Navigation:** [Categorized compendium](#7-categorized-compendium-and-integration-roles) · [GR00T integration](#79-gr00t-integration-architecture) · [Integration contracts](#710-cross-stack-integration-contracts) · [Delivery gates](#713-incremental-delivery-and-evidence)
+
 # 1. Source Project Direction
 
 The current JFXAI4MHERS README describes an:
@@ -236,33 +240,239 @@ Useful integration requiring independent license review
 
 ---
 
-# 7. Proposed Component Classification
+# 7. Categorized Compendium and Integration Roles
 
-| Component | Main Role | Proposed Classification |
+This expanded catalog covers all 35 supplied entries. Links identify source projects, not implemented JFXAI4MHERS adapters. Roles below are proposed; releases, licenses, assets, APIs and hardware configurations require qualification.
+
+## 7.1 Humanoid platforms and embodiment references
+
+| Component and source | Proposed role | Qualification boundary |
 |---|---|---|
-| Berkeley Humanoid Lite | Open humanoid platform | Hardware Reference |
-| ToddlerBot | Humanoid learning platform | Hardware Reference |
-| OpenArm | Dexterous bimanual arm | Hardware Reference / Core Candidate |
-| OpenMANIPULATOR | ROS 2 manipulator | Hardware Reference |
-| BiDexHand | Dexterous hand | Hardware Reference |
-| TidyBot++ | Mobile manipulation | Research / Hardware Reference |
-| OpenVLA | Vision-Language-Action | AI Provider |
-| openpi | Robot foundation/VLA models | AI Provider |
-| CRAM | Cognitive architecture | Core Candidate |
-| RoboKudo | Perception | Core Candidate |
-| Giskardpy | Whole-body motion control | Core Candidate |
-| Horizon | Trajectory optimization | Optional Adapter |
-| NEST | Spiking neural simulation | Research |
-| Open-TeleVision | Teleoperation | Optional Adapter |
-| DOGlove | Haptic teleoperation | Optional Adapter |
-| OpenBCI | BCI research | Research |
-| OpenExo / ALICE | Exoskeleton research | Research |
-| Multibody.jl | Multibody simulation | Optional Adapter |
-| Isaac Sim | High-fidelity simulator | External / Optional Adapter |
-| RViz | Visualization | Core Candidate |
-| IR-SIM | Lightweight simulation | Optional Adapter |
+| [HOPE Jr / HOPEJr](https://github.com/TheRobotStudio/HOPEJr) | DIY humanoid and dexterous-hand research; robot-description and teleoperation reference | Distinguish the full Humanoid and Arm/LeRobot tracks; verify hand revision, firmware, CAD rights and available control interfaces |
+| [QingLoong / OpenLoong Hardware](https://github.com/loongOpen/OpenLoong-Hardware) | Full-size humanoid component architecture, mechanical assets and embodiment requirements | Hardware drawings do not establish a complete runnable controller; qualify software, model assets and licenses separately |
+| [Berkeley Humanoid Lite](https://github.com/HybridRobotics/berkeley-humanoid-lite) | Humanoid description, simulation and learning profile | Code and non-code assets use different terms; validate the selected hardware/model revision |
+| [Asimov](https://github.com/menloresearch/asimov-1) | Alternative buildable humanoid and embodiment adapter | Keep Asimov versions distinct; hardware and software licenses differ |
+| [ToddlerBot](https://github.com/hshi74/toddlerbot) | Small humanoid for policy learning and loco-manipulation | MIT code does not remove the documented non-commercial restriction on design assets |
+| [AGILOped](https://github.com/gficht/AGILOped_model) — Agile Open-Source Humanoid Robot for Research | Hardware, URDF, MuJoCo and STEP model reference | Asset availability is not evidence of integrated control, sensing or hardware availability |
+| [WALK-MAN assets](https://github.com/ADVRHumanoids/iit-walkman-ros-pkg) | MBSE reference for future degraded-environment capabilities and requirements | Retain as a requirements/model reference; qualify legacy ROS/Gazebo assets before reuse |
+| [Centauro model](https://github.com/ADVRHumanoids/centauro-simulator) | Later disaster-response asset/controller evaluation | Legacy ROS launch conventions need isolation or porting; physical hardware availability is not assumed |
 
-Licenses and redistribution conditions must be checked per upstream project and per asset/model.
+Disaster-response references support civilian inspection, robustness and recovery scenarios. They do not imply that an open robot model is deployable in a hazardous environment or that a controller has been validated for that task.
+
+## 7.2 Arms, dexterous hands and mobile manipulation
+
+| Component and source | Proposed role | Qualification boundary |
+|---|---|---|
+| [OpenArm](https://github.com/enactic/openarm) | 7DOF arm and optional bimanual research cell | Select actual hardware, ROS 2 and simulation repositories; separate arm, gripper and cell capabilities |
+| [ROBOTIS OpenMANIPULATOR](https://github.com/ROBOTIS-GIT/open_manipulator) | Official ROS 2 manipulation platform integration | Qualify the selected robot model, distribution, drivers and simulation assets |
+| [BiDexHand](https://github.com/wengmister/BiDexHand) | Dexterous-hand hardware, calibration and pose/synergy adapter | Tendon/servo mapping, limits and sensing must match the specific revision; tactile sensing is not assumed |
+| [TidyBot++](https://github.com/jimmyyhwu/tidybot2) | Holonomic mobile-manipulation and demonstration collection profile | Base, arm and camera interfaces remain separately qualified; mobile navigation does not validate full humanoid balance |
+
+Hardware capability discovery must reflect actual sensors and command modes. Unsupported force, tactile, torque or Cartesian commands should be rejected rather than simulated as successful.
+
+## 7.3 Embodied policies, whole-body control and cognition
+
+| Component and source | Proposed role | Qualification boundary |
+|---|---|---|
+| [GR00T-WholeBodyControl — requested fork](https://github.com/sdk2035/GR00T-WholeBodyControl) / [upstream](https://github.com/NVlabs/GR00T-WholeBodyControl) | Optional whole-body controller provider: decoupled WBC, GEAR-SONIC and associated research workflows | Pin fork and upstream revisions; checkpoint, embodiment and observation configuration are coupled. Source and model-weight licenses differ |
+| [OpenVLA](https://github.com/openvla/openvla) | Instruction-conditioned manipulation policy | MIT code and base-model-derived weight terms differ; action normalization must match the training embodiment/dataset |
+| [openpi](https://github.com/Physical-Intelligence/openpi) | Alternative VLA training/inference provider | Pin model generation, checkpoint, runtime and action-chunk semantics; not a universal robot driver |
+| [CRAM](https://github.com/cram2/cognitive_robot_abstract_machine) | Cognitive plans, task execution, semantic state and failure reasoning | Qualify the current monorepo separately from [legacy Common Lisp CRAM](https://github.com/cram2/cram); runtime and middleware support are version-specific |
+| [SMART-LLM](https://github.com/SMARTlab-Purdue/SMART-LLM) — Smart Multi-Agent Robot Task Planning using LLMs | Research baseline for decomposition, coalition formation and task allocation | A plan must pass capability/resource checks; swapping a hosted LLM for a local model requires new evaluation |
+| [NEST](https://github.com/nest/nest-simulator) | Spiking-neural-network research sandbox | A neural simulator, not a rigid-body simulator or default real-time motor controller |
+
+Policy inference, task planning and controller execution are different services. A model producing a plausible action does not establish physical feasibility, correct task completion or an authorized command.
+
+## 7.4 Motion, kinematics and description generation
+
+| Component and source | Proposed role | Qualification boundary |
+|---|---|---|
+| [Giskardpy](https://github.com/SemRoCo/giskardpy) / [current monorepo location](https://github.com/cram2/cognitive_robot_abstract_machine/tree/main/giskardpy) | Constraint/optimization-based motion control | Qualify solver dependencies and ROS integration branch; mobile-manipulator control does not automatically provide free-standing biped balance |
+| [Horizon](https://github.com/ADVRHumanoids/Horizon) | CasADi-based trajectory optimization and optimal control | Verify CasADi build, dynamics model, constraints, solver and timing; do not assume hard real-time feasibility |
+| [IAI Naive Kinematics](https://github.com/code-iai/iai_naive_kinematics_sim) | Lightweight kinematics experimentation | Reviewed instructions target ROS Melodic/Noetic; kinematic feasibility is not dynamic stability or contact validation |
+| [Modular HHCM](https://github.com/ADVRHumanoids/modular_hhcm) | Generate URDF, SRDF and robot packages from modular configuration | Verify generated package/middleware target; a ROS 2 exporter is a qualification or implementation task, not an assumed feature |
+
+Description conversion must compare joint axes, origins, inertias, masses, limits, transmissions, collision geometry and actuator semantics. Similar rendered geometry is insufficient evidence of dynamics equivalence.
+
+## 7.5 Perception, visualization and human representations
+
+| Component and source | Proposed role | Qualification boundary |
+|---|---|---|
+| [RoboKudo](https://robokudo.ai.uni-bremen.de/) | Behavior-tree-based manipulation perception pipelines | Qualify ROS 1/ROS 2 installation and annotators; export timestamped hypotheses with calibration and provenance |
+| [RViz / RViz2](https://github.com/ros2/rviz) | Robot state, TF, scene and trajectory inspection | Visualization only; an RViz display is not physics validation |
+| [Human URDF models](https://github.com/gbionics/human-gazebo) | HRI, proximity and reachability experiments | Rigid-body human models are not clinically validated biomechanics; source motion-capture tooling and meshes have separate dependencies/terms |
+
+Preserve sensor timestamps, frame transforms, calibration versions and observation quality. Perception outputs are estimates; label them accordingly instead of promoting every detection to ground truth.
+
+## 7.6 Simulation and scientific dynamics
+
+| Component and source | Proposed role | Qualification boundary |
+|---|---|---|
+| [RT Robot Arm Simulator](https://github.com/Nobu19800/RobotArmSimulatorRTC) | Legacy OpenRTM arm-component simulation reference | The inspected component specification references OpenRTM-aist; ROS 2 support and hard real-time execution are not established |
+| [NVIDIA Isaac Sim](https://github.com/isaac-sim/IsaacSim) | Optional Omniverse-based simulation and sensor-learning profile | Repository code is Apache-2.0; [additional required components and assets have other terms](https://github.com/isaac-sim/IsaacSim/blob/main/LICENSE) |
+| [Multibody.jl](https://github.com/JuliaComputing/Multibody.jl) | Optional JuliaSim scientific multibody analysis | [License](https://github.com/JuliaComputing/Multibody.jl/blob/main/LICENSE) declares commercial JuliaHub terms with non-commercial academic use; not a mandatory free-software dependency |
+| [CoMan Robotran simulator](https://github.com/TimotheeHabra/coman_robotran) | Historical humanoid dynamics comparison | Distinguish MATLAB/Simulink and standalone C/C++ paths; qualify Robotran generation/runtime and legacy dependencies |
+| [IR-SIM](https://github.com/hanruihua/ir-sim) | Lightweight navigation, control and planning experiments | Not a replacement for validated whole-body contact dynamics |
+
+MuJoCo/Gazebo remain the existing simulator-neutral baseline candidates. Specialized models should exchange scenarios and results through adapters; their internal states and solvers need not be interchangeable.
+
+## 7.7 Teleoperation and demonstration collection
+
+| Component and source | Proposed role | Qualification boundary |
+|---|---|---|
+| [DOGlove](https://github.com/TEA-Lab/DOGlove) | Dexterous input and haptic-feedback research | Calibrate hand mapping, input range, feedback limits and disconnect behavior |
+| [Open-TeleVision](https://github.com/OpenTeleVision/TeleVision) | Immersive visual feedback and remote demonstration collection | Qualify headset/browser, camera pipeline, retargeting and end-to-end latency |
+
+Teleoperation requires exclusive command authority, operator enable/disable semantics and timeout handling. Haptic feedback and visual rendering must not prevent the local controller from maintaining its independent limits.
+
+## 7.8 BCI, wearable robotics and human-assistance research
+
+| Component and source | Proposed role | Qualification boundary |
+|---|---|---|
+| [OpenBCI](https://github.com/OpenBCI/OpenBCI_GUI) | Recorded biosignal analysis and optional intent-classification research | Start with replay/simulation; a classification is not authorization for direct actuator control |
+| [OpenExo](https://github.com/naubiomech/OpenExo) | Wearable robot architecture, instrumentation and control research | Hardware/firmware-specific qualification and separate human-subject evaluation are required |
+| [ALICE](https://github.com/GuillermoHra/ALICE-OpenSource-Robotic-Exoskeleton) | Pediatric exoskeleton design and simulation reference | Catalog inclusion is not clinical validation, a treatment recommendation or permission for human deployment |
+
+BCI and wearable profiles are separate from the general humanoid MVP. Human recordings require consent and appropriate access/retention controls; use synthetic or authorized recorded inputs for initial experiments.
+
+## 7.9 GR00T Integration Architecture
+
+GR00T-WholeBodyControl is a specialized controller integration, not the common interface for every robot. The reviewed fork describes decoupled lower-body RL/upper-body IK and GEAR-SONIC controller families. Its released SONIC model card is centered on Unitree G1 checkpoints; this does not establish compatibility with HOPE Jr, QingLoong, Berkeley Lite, Asimov or ToddlerBot.
+
+```mermaid
+flowchart TD
+  A["Task goal and capability registry"] --> B["Validated skill plan"]
+  B --> C["VLA or teleoperation adapter"]
+  D["Calibrated observations"] --> C
+  C --> E["Embodiment and action mapping"]
+  E --> F["Command authority and constraint checks"]
+  F --> G["Selected controller"]
+  H["Qualified GR00T profile"] --> G
+  I["Alternative motion provider"] --> G
+  G --> J["Simulation or local robot runtime"]
+  J --> K["Telemetry and evaluation"]
+  K --> D
+  K --> L["Experiment and twin history"]
+```
+
+Select exactly one active owner for each controlled joint group. GR00T, Giskardpy, Horizon-derived trajectories and teleoperation must not concurrently write incompatible commands to the same actuators.
+
+### Controller profile contract
+
+| Field | Required meaning |
+|---|---|
+| Embodiment | Robot description hash, hardware revision, joint names/order, sign conventions and actuator types |
+| Controller family | Decoupled WBC, SONIC or another provider; no implicit substitution |
+| Model bundle | Compatible encoder/decoder/checkpoint, observation configuration and checksums |
+| Observation contract | Proprioception, reference representation, history/lookahead, normalization and timestamps |
+| Action contract | Position/velocity/torque or latent/reference semantics, frames, units, scale and bounds |
+| Timing | Inference period, robot-loop period, deadline, buffering and stale-input policy |
+| Runtime | Training, simulation and deployment environments with pinned dependencies |
+| Calibration | Joint offsets, base orientation, cameras, hands and gains/configuration revision |
+| Qualification | Allowed tasks and simulator, regression evidence and explicitly approved deployment profile |
+
+For the reviewed SONIC release, encoder, decoder and observation configuration must be used as a matching bundle. Its model card distinguishes reference lookahead variants. A lower-lookahead model is not automatically compatible with another checkpoint's preprocessing.
+
+The fork documents Isaac Lab for training and a separate MuJoCo simulation environment, plus a C++/TensorRT deployment stack. Preserve these distinct profiles rather than describing all workflows as independent of NVIDIA components. Checkpoint weights use NVIDIA Open Model License terms separately from Apache-2.0 source code.
+
+### New-embodiment admission
+
+1. Acquire and qualify the robot description, inertial model, limits, actuators and available observations.
+2. Define exact mappings between dataset/model joints and the target robot, including base frames and orientation conventions.
+3. Identify unsupported observation/action channels; do not fill critical missing signals with fabricated values.
+4. Establish a deterministic controller baseline and replay recorded observations without physical actuation.
+5. Retarget demonstrations and retrain/fine-tune where necessary; validate dynamics and contact behavior in the selected simulator.
+6. Measure tracking errors, failure cases, timing and saturation, including stale input and disconnect scenarios.
+7. Consider a separately reviewed hardware evaluation only after simulation and interface gates pass.
+
+There is no claim that a G1 policy can be transferred by renaming joints or rescaling a URDF. Hardware acquisition, balance control and real-world operation remain separate engineering work.
+
+## 7.10 Cross-Stack Integration Contracts
+
+| Boundary | Proposed contract | Verification |
+|---|---|---|
+| Description → simulation | Versioned model, joints, inertias, collision shapes and actuator mapping | Kinematic round trips, limits and physical parameter checks |
+| Perception → world model | Timestamped object hypotheses, frame, covariance/quality and source | Transform age, calibration and object-identity consistency |
+| Planner → skill runtime | Preconditions, resources, expected outcomes and cancellation | Capability checks, task ownership and bounded recovery |
+| VLA → action mapper | Named action space, units, normalization, chunk length and rate | Dataset/embodiment match; reject unknown modes |
+| Teleoperation → controller | Operator session, authority lease, mapped targets and expiry | Exclusive ownership and disconnect behavior |
+| Controller → runtime | Validated joint/trajectory commands and deadline | Local watchdog, limits and stale-command rejection |
+| Runtime → twin | Measured state, contacts, execution receipts and diagnostic events | Separate commanded, estimated, simulated and measured values |
+| Evaluation → model registry | Scenario, seed, artifacts, metrics and failure evidence | Reproducibility and version-bound approval |
+
+The ROS 2 control plane, event/API plane and AI/MCP plane are distinct. Legacy ROS 1/OpenRTM assets need isolated adapters or deliberate ports; containerization does not make their messages, controllers or dependencies ROS 2-compatible.
+
+A middleware bridge is a proposed engineering component, not an implied solution to incompatible timing or semantics. Pin ROS distribution, message definitions, QoS and simulator interfaces. Keep hard real-time control outside HTTP/MCP and general-purpose model inference.
+
+## 7.11 Open AI, RAG and Digital-Twin Extension
+
+A local robotics assistant can retrieve approved manuals, robot descriptions, controller documentation and prior experiment evidence. It may propose typed task graphs, explain failures or prepare simulation configurations. Its suggestions remain distinct from approved execution.
+
+| AI function | Output | Evaluation |
+|---|---|---|
+| RAG engineering assistant | Source-cited explanation/configuration draft | Citation accuracy, correct version and unsupported-answer handling |
+| LLM task planner | Typed skill graph with resource assignments | Schema validity, preconditions, deadlocks and deterministic baseline comparison |
+| VLA policy | Embodiment-specific actions or action chunks | Held-out tasks/scenes, action semantics and inference latency |
+| Whole-body policy | Qualified motion references/control output | Tracking, contact/balance behavior, saturation and recovery evidence |
+| Perception | Scene hypotheses with provenance | Calibration, detection errors, latency and out-of-domain inputs |
+| Experiment analysis | Comparison of logged runs | Reproducible metrics; no invented hardware or task outcomes |
+
+A proposed MCP gateway may expose read-only robot/twin queries, scenario validation, simulation launches and result comparisons. Write-capable task proposals require scope and authorization. No raw actuator writes or disable-interlock functions are exposed to a general assistant.
+
+The twin stores geometry, calibration, software/firmware, controller configuration, measured state and health history. Simulated branches and model predictions retain separate provenance. Updating a model checkpoint does not silently replace an approved controller configuration.
+
+An episode manifest should include robot/model hashes, sensor calibration, synchronized observations, action representation, task/scene version, controller mode, operator/source identity where authorized, interventions and outcome. Split training and evaluation by task/scene/operator or hardware condition as appropriate to avoid demonstration leakage.
+
+### Authority state model
+
+```mermaid
+stateDiagram-v2
+  [*] --> Idle
+  Idle --> Simulating: Validated scenario
+  Simulating --> Review: Evaluation complete
+  Review --> Idle: Reject or revise
+  Review --> Ready: Qualified profile
+  Ready --> Executing: Authorized task
+  Executing --> Paused: Timeout or intervention
+  Paused --> Ready: Revalidated state
+  Paused --> Idle: Abort
+  Executing --> Idle: Verified completion
+```
+
+This is a proposed application lifecycle, not a safety-certified state machine. Local robot protection remains independent of application state.
+
+## 7.12 License, Dependency and Maturity Gates
+
+An open repository does not imply uniform rights to code, trained weights, datasets, CAD, meshes, simulator assets or a complete runtime.
+
+| Finding from reviewed sources | Architectural consequence |
+|---|---|
+| GR00T source and weights use separate licenses | Track both in the controller manifest; do not label all artifacts Apache-2.0 |
+| Isaac Sim source is Apache-2.0 but requires additional separately licensed components | Optional ecosystem profile; do not claim the entire dependency chain is free software |
+| Multibody.jl declares commercial JuliaSim terms | External/restricted-license scientific adapter, excluded from a strict free-software baseline |
+| ToddlerBot design assets are CC BY-NC-SA while code is MIT | Separate software experiments from hardware-design redistribution/commercial use |
+| OpenVLA pretrained models inherit base-model terms | Weight qualification is independent of the source-code license |
+| Giskardpy moved into the CRAM monorepo | Pin the chosen implementation and solver/ROS integration, rather than relying on an old import path |
+| Naive Kinematics and Centauro assets show legacy ROS workflows | Replay/porting profiles until modern middleware integration is tested |
+| CoMan includes MATLAB/Simulink and standalone paths | Evaluate the entire selected toolchain, not only the generated C/C++ code |
+
+Admission stages: **cataloged → source/license qualified → model/interface validated → simulation evaluated → hardware evaluation authorized and completed**. No component advances solely because it appears in this README.
+
+## 7.13 Incremental Delivery and Evidence
+
+| Phase | Scope | Required result |
+|---|---|---|
+| A. Description baseline | One arm or humanoid, one simulator, visualization | Consistent joint/frame mapping, reset/replay and versioned model |
+| B. Deterministic skills | One motion provider and simple task | Constraints, timeout/cancel behavior and reproducible completion |
+| C. Perception and teleoperation | One camera pipeline and one demonstration path | Calibration, synchronization and exclusive command authority |
+| D. VLA comparison | OpenVLA or openpi against a baseline | Held-out task results, latency and invalid-action handling |
+| E. GR00T research | Matching upstream embodiment/checkpoint in simulation | Bundle compatibility, reference tracking and failure analysis |
+| F. Alternative embodiments | HOPE Jr, QingLoong, Asimov, AGILOped or another qualified model | Explicit adaptation effort and per-robot evidence |
+| G. Advanced references | WALK-MAN/Centauro MBSE; NEST/BCI/exoskeleton research | Separate domain scope and evaluation plan |
+
+Begin with one coherent profile, not the entire earlier “production recommendation” as a mandatory installation list. Infrastructure, simulator and model choices remain replaceable.
+
+Documentation checks for this change cover all 35 supplied entries, source links, new Markdown fences and preservation of the existing engineering sections. No simulator build, training run, real-time benchmark, hardware trial or clinical evaluation has been performed.
 
 ---
 
@@ -357,7 +567,7 @@ This replaces manually diverging model definitions.
 
 # 12. HHCM-Style Generator Role
 
-The HHCM concept in the source compendium can be generalized as:
+The HHCM concept can be generalized into the following target design. Generated ROS 2 packages and extra export formats are proposed extensions unless supported by the qualified upstream release:
 
 ```text
 Robot Configuration
@@ -501,7 +711,7 @@ Constraints
 Joint / Torque Targets
 ```
 
-Giskardpy is well aligned with this role because it provides constraint- and optimization-based whole-body motion control.
+Giskardpy is a candidate for constraint-based motion control. Free-standing humanoid balance and contact handling require robot-specific verification; mobile-manipulator whole-body control alone does not establish biped locomotion capability.
 
 ---
 
@@ -2062,7 +2272,7 @@ This preserves portability to open simulators.
 
 # 95. Julia / Multibody Boundary
 
-Multibody.jl can remain an optional scientific simulation adapter.
+Multibody.jl can remain an optional scientific simulation adapter under its JuliaSim commercial/academic terms; it is not part of the strictly free-software baseline.
 
 The core architecture should use:
 
@@ -2547,7 +2757,7 @@ Before packaging a distribution, verify:
 
 This document is an integration-architecture proposal.
 
-The original JFXAI4MHERS README is a short compendium and does not currently define one integrated runtime architecture.
+The repository now describes a modular integration architecture, but the documented adapters and deployment profiles do not constitute an implemented or validated integrated runtime.
 
 This proposal distinguishes:
 

@@ -14,7 +14,7 @@
 
 > **Implementation status:** this repository contains architecture documentation and MBSE assets. The catalog expansion below is a proposal, not a running integrated stack. APIs, directory layouts, example metrics and deployment profiles are illustrative until implemented and tested. Source review: 2026-09-20.
 >
-> **Navigation:** [Categorized compendium](#7-categorized-compendium-and-integration-roles) · [GR00T integration](#79-gr00t-integration-architecture) · [Integration contracts](#710-cross-stack-integration-contracts) · [Delivery gates](#713-incremental-delivery-and-evidence)
+> **Navigation:** [Categorized compendium](#7-categorized-compendium-and-integration-roles) · [GR00T integration](#79-gr00t-integration-architecture) · [Integration contracts](#710-cross-stack-integration-contracts) · [Delivery gates](#713-incremental-delivery-and-evidence) · [CoMan/Robotran](#714-comanrobotransimulator-integration-profile)
 
 # 1. Source Project Direction
 
@@ -311,7 +311,7 @@ Preserve sensor timestamps, frame transforms, calibration versions and observati
 | [RT Robot Arm Simulator](https://github.com/Nobu19800/RobotArmSimulatorRTC) | Legacy OpenRTM arm-component simulation reference | The inspected component specification references OpenRTM-aist; ROS 2 support and hard real-time execution are not established |
 | [NVIDIA Isaac Sim](https://github.com/isaac-sim/IsaacSim) | Optional Omniverse-based simulation and sensor-learning profile | Repository code is Apache-2.0; [additional required components and assets have other terms](https://github.com/isaac-sim/IsaacSim/blob/main/LICENSE) |
 | [Multibody.jl](https://github.com/JuliaComputing/Multibody.jl) | Optional JuliaSim scientific multibody analysis | [License](https://github.com/JuliaComputing/Multibody.jl/blob/main/LICENSE) declares commercial JuliaHub terms with non-commercial academic use; not a mandatory free-software dependency |
-| [CoMan Robotran simulator](https://github.com/TimotheeHabra/coman_robotran) | Historical humanoid dynamics comparison | Distinguish MATLAB/Simulink and standalone C/C++ paths; qualify Robotran generation/runtime and legacy dependencies |
+| [CoManRobotranSimulator — requested repository](https://github.com/sdk2035/CoManRobotranSimulator) / [origin named in its README](https://github.com/HDallali/CoManRobotranSimulator) / [separate CoMan reference](https://github.com/TimotheeHabra/coman_robotran) | Optional research adapter for CoMan multibody dynamics and controller comparison; see [integration profile](#714-comanrobotransimulator-integration-profile) | Qualify Robotran, the standalone C/C++ build and optional YARP interface. Keep repository lineages and model revisions distinct; ROS 2, learning APIs and real-time guarantees are not established |
 | [IR-SIM](https://github.com/hanruihua/ir-sim) | Lightweight navigation, control and planning experiments | Not a replacement for validated whole-body contact dynamics |
 
 MuJoCo/Gazebo remain the existing simulator-neutral baseline candidates. Specialized models should exchange scenarios and results through adapters; their internal states and solvers need not be interchangeable.
@@ -454,7 +454,7 @@ An open repository does not imply uniform rights to code, trained weights, datas
 | OpenVLA pretrained models inherit base-model terms | Weight qualification is independent of the source-code license |
 | Giskardpy moved into the CRAM monorepo | Pin the chosen implementation and solver/ROS integration, rather than relying on an old import path |
 | Naive Kinematics and Centauro assets show legacy ROS workflows | Replay/porting profiles until modern middleware integration is tested |
-| CoMan includes MATLAB/Simulink and standalone paths | Evaluate the entire selected toolchain, not only the generated C/C++ code |
+| The requested CoManRobotranSimulator documents Robotran installation and a standalone build with optional YARP; other CoMan references have different workflows | Qualify this repository independently, including Robotran terms, generated code, model assets and enabled dependencies; do not infer a fully free runtime or a MATLAB requirement from another repository |
 
 Admission stages: **cataloged → source/license qualified → model/interface validated → simulation evaluated → hardware evaluation authorized and completed**. No component advances solely because it appears in this README.
 
@@ -473,6 +473,77 @@ Admission stages: **cataloged → source/license qualified → model/interface v
 Begin with one coherent profile, not the entire earlier “production recommendation” as a mandatory installation list. Infrastructure, simulator and model choices remain replaceable.
 
 Documentation checks for this change cover all 35 supplied entries, source links, new Markdown fences and preservation of the existing engineering sections. No simulator build, training run, real-time benchmark, hardware trial or clinical evaluation has been performed.
+
+---
+
+## 7.14 CoManRobotranSimulator Integration Profile
+
+**Category:** simulation, multibody dynamics and digital-twin research. **Classification:** OPTIONAL ADAPTER / RESEARCH, with dependency and license qualification before distribution. **Status:** proposed integration only; no simulator build or adapter execution has been performed.
+
+### Source identity and observed build boundary
+
+The requested [sdk2035/CoManRobotranSimulator](https://github.com/sdk2035/CoManRobotranSimulator) describes a simulator for the CoMan humanoid developed as part of the WALK-MAN European project. Its [README](https://github.com/sdk2035/CoManRobotranSimulator/blob/master/README.md) points to [HDallali/CoManRobotranSimulator](https://github.com/HDallali/CoManRobotranSimulator) in the clone instructions and requires Robotran installation. Retain both source identities and pin the exact revision used; the separate TimotheeHabra CoMan reference is not assumed to be identical.
+
+The reviewed [Standalone/CMakeLists.txt](https://github.com/sdk2035/CoManRobotranSimulator/blob/master/Standalone/CMakeLists.txt) contains:
+
+- C/C++ build configuration and a required Libxml2 dependency.
+- An optional `FLAG_YARP` interface, disabled by default; enabling it selects C++ and requires YARP.
+- Optional SDL, JNI/Java 3D, Simbody and visualization paths, controlled by build flags.
+- A `FLAG_REAL_TIME` mode; this name does not establish measured timing or hard real-time performance.
+- Legacy CMake settings and an optional compiler-selection branch naming GCC 4.4; current compiler compatibility must be tested rather than assumed.
+
+The README also specifies `YARP_ROBOT_NAME=CoMan` and a build-specific `YARP_DATA_DIRS` location. Record these in the runtime profile when that interface is enabled. Do not treat these setup instructions as a ROS 2 bridge or as proof of a complete learning environment.
+
+### Proposed adapter architecture
+
+```mermaid
+flowchart TD
+    E["Experiment runner"] --> A["CoMan simulation adapter"]
+    P["Policy or controller candidate"] --> G["Action validation"]
+    G --> A
+    A --> W["Isolated Robotran worker"]
+    W --> N["State and time normalization"]
+    N --> P
+    N --> D["Dataset and twin registry"]
+    D --> V["Baseline comparison"]
+    V --> E
+```
+
+Start with an isolated standalone process and offline result ingestion. Introduce a YARP bridge only after its actual messages, units and control modes have been inspected. A later ROS 2 adapter is a separate implementation task. Keep simulation stepping inside the qualified worker rather than routing a timing-critical loop through MCP, HTTP or an enterprise event bus.
+
+| Contract | Proposed CoMan mapping | Qualification evidence |
+|---|---|---|
+| Robot identity | Source commit, Robotran/model revision, model hashes, joint names and ordering | Configuration manifest and reproducible model load |
+| State | Joint position/velocity and any available base or contact outputs | Explicit SI units, coordinate frames, timestamps and signal availability; do not synthesize undocumented sensor outputs |
+| Action | Only control modes actually exposed by the selected build | Joint mapping, limits, sign conventions, saturation and rejected-command handling |
+| Simulation lifecycle | Load, initialize, advance, stop and reset/restart | Deterministic initial conditions and documented time-step semantics; emulate reset through process restart if needed |
+| Contact and dynamics | Selected ground-contact model or optional Simbody path | Record build flags, contact parameters, masses, inertias and solver settings |
+| Results | State trajectories, control histories, available contacts, runtime and failures | Versioned artifacts, scenario IDs, seeds where applicable and artifact hashes |
+
+Any URDF/MJCF conversion requires a documented transformation and numerical comparison; visual resemblance does not establish equal dynamics. Unsupported state-setting, batch stepping or observations must be advertised as unavailable rather than implemented with silent approximations.
+
+### AI and digital-twin research roles
+
+- **Controller evaluation:** compare a deterministic baseline with a learned controller on the same qualified CoMan model and scenario. Candidate measures include trajectory error, falls, constraint violations and computation time; define thresholds before acceptance.
+- **Policy learning:** export validated observation/action trajectories for offline learning. Reinforcement-learning reset/step/reward/termination wrappers are future work, not existing simulator capabilities.
+- **GR00T and VLA boundary:** reuse the controller and embodiment contracts in sections 7.9–7.10. A GR00T checkpoint, OpenVLA model or openpi policy must not be presumed compatible with CoMan joint layouts, sensors or action semantics.
+- **Digital-twin calibration:** compare model trajectories against independent reference or measured data when available. Separate calibration data from validation data and record parameter uncertainty.
+- **AI assistance:** use documentation retrieval and experiment summaries to support engineers. AI suggestions cannot replace the dynamics model, numerical checks or command validation.
+
+### Delivery and evidence gates
+
+| Gate | Work | Acceptance evidence |
+|---|---|---|
+| C0 — Provenance and terms | Pin requested repository and origin, inspect code/model licenses and Robotran/dependency terms | Reviewed dependency manifest; unresolved rights block redistribution |
+| C1 — Reproducible standalone build | Select compiler, build flags and minimal dependencies; retain logs | Repeatable build and a documented reference run; not presumed container-ready |
+| C2 — Model and interface qualification | Map joints, frames, units, initial state and control modes | Baseline replay, reset/restart behavior and numerical checks with agreed tolerances |
+| C3 — Simulator-neutral adapter | Implement supported lifecycle and telemetry contracts | Invalid-command, timeout, cancellation and artifact tests |
+| C4 — AI comparison | Add one candidate controller or offline learner | Held-out scenarios and comparison with the deterministic baseline |
+| C5 — Twin update | Correlate against independent data and assess uncertainty | Traceable parameter update and regression results; no automatic hardware deployment |
+
+Proposed artifacts may live under `simulation/coman_robotran/`, `docs/simulation/coman_robotran.md` and `evaluation/coman_robotran/`. These paths are a roadmap, not files created by this documentation change. Link requirements and evidence to **MBSE → CAD → CAM → CAS**, with simulator experiments and validation reports in the CAS scope.
+
+**Source review:** 2026-09-22, based on the requested repository README and standalone build configuration. License clearance, compilation, physics validation, ROS 2 bridging and policy compatibility remain pending.
 
 ---
 
@@ -599,7 +670,7 @@ Gazebo
 Optional:
 IR-SIM
 Multibody.jl
-specialized CoMan simulator
+CoManRobotranSimulator (qualified optional research adapter)
 
 External adapter:
 Isaac Sim / Isaac Lab

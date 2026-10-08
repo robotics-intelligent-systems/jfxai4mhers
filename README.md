@@ -14,7 +14,7 @@
 
 > **Implementation status:** this repository contains architecture documentation and MBSE assets. The catalog expansion below is a proposal, not a running integrated stack. APIs, directory layouts, example metrics and deployment profiles are illustrative until implemented and tested. Source review: 2026-09-20.
 >
-> **Navigation:** [Categorized compendium](#7-categorized-compendium-and-integration-roles) · [GR00T integration](#79-gr00t-integration-architecture) · [Integration contracts](#710-cross-stack-integration-contracts) · [Delivery gates](#713-incremental-delivery-and-evidence) · [CoMan/Robotran](#714-comanrobotransimulator-integration-profile)
+> **Navigation:** [Documentation index](docs/README.md) · [Hunting licensing reference](docs/regulations/peru-hunting-licensing-and-restricted-areas.md) · [Categorized compendium](#7-categorized-compendium-and-integration-roles) · [GR00T integration](#79-gr00t-integration-architecture) · [Integration contracts](#710-cross-stack-integration-contracts) · [Delivery gates](#713-incremental-delivery-and-evidence) · [CoMan/Robotran](#714-comanrobotransimulator-integration-profile)
 
 # 1. Source Project Direction
 

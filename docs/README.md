@@ -13,3 +13,7 @@ The [project overview](../README.md) describes the humanoid robotics engineering
 [Migration register](MIGRATION-REGISTER.md): **1 plaintext source processed**. The Spanish TXT was converted into English Markdown and removed from the working branch; the original remains in Git history.
 
 Supplementary legal context does not establish operational permission or an implemented robotics capability.
+
+## Concept CAD requirements
+
+[OpenTwin EXO high-level specification](requirements/opentwin-exo-high-level-specification.md) · [Traceability matrix](requirements/opentwin-exo-traceability.csv) · [Editable Draw.io diagram](../MBSE/CAS/Drawio/opentwin-exo-high-level-requirements.drawio). Proposed requirements derived from the concept illustration; quantitative parameters and verification remain pending.

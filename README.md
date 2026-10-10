@@ -2005,6 +2005,8 @@ KiCad for electronics
 
 CAD remains separate from simulation descriptions.
 
+The [OpenTwin EXO concept specification](docs/requirements/opentwin-exo-high-level-specification.md) separates visual intent, proposed high-level requirements, interface contracts and verification gates. Its [Draw.io diagram](MBSE/CAS/Drawio/opentwin-exo-high-level-requirements.drawio) and traceability matrix do not establish implemented or validated capabilities.
+
 ---
 
 # 80. CAM / Manufacturing Integration

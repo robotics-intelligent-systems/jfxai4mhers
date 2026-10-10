@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="24.7.17">
+  <diagram id="0" name="1 · Contexto y alcance">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1400" pageHeight="1000">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="1 · Contexto y alcance&#10;Necesidades interpretadas del concepto; subsistemas propuestos" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e2e8f0;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="user" value="Usuario y supervisor&#10;N-01 ajuste · N-02 asistencia" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="180" width="290" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="exo" value="OpenTwin EXO&#10;Traje modular propuesto&#10;Estructura · sensado · control&#10;Energía por definir" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="480" y="170" width="400" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="twin" value="JFXAI4MHERS&#10;N-03 gemelo / simulación&#10;Contratos de robot y evidencia" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="180" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="work" value="Construcción&#10;HL-13" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fef3c7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="480" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="camp" value="Camping / gastronomía&#10;HL-14" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fef3c7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="480" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="restricted" value="Pesca / caza&#10;HL-15 · interfaces pasivas&#10;Sin habilitación automática" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fef3c7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="710" y="480" width="280" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="clinical" value="Asistencia profesional&#10;HL-16 · alcance segregado&#10;Validación pendiente" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fef3c7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="480" width="280" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="S1 es una ilustración conceptual, no CAD dimensionado.&#10;La aeronave queda fuera del alcance. N-04: accesorios según revisión." style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fef3c7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="700" width="680" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="ajuste / interacción" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="user" target="exo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="modelo / observaciones" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="exo" target="twin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="IF-02" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="exo" target="work">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="IF-02" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="exo" target="camp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="IF-02 / restricción" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="exo" target="restricted">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="IF-02 / segregación" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="exo" target="clinical">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="PROPUESTA 0.1 • Todos los HL pendientes de aprobación y verificación&#10;Azul: arquitectura • Ámbar: alcance / decisiones • Verde: evidencia requerida&#10;Fuente: concepto v3 y README; base eedebad5ea33" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1f5f9;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="860" width="1320" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="1" name="2 · Asignación de requisitos">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1400" pageHeight="1000">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="2 · Asignación de requisitos&#10;ID coherentes con especificación y matriz CSV; TBD requieren cierre" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e2e8f0;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="source" value="S1 concepto v3 + S2 arquitectura&#10;Derivación editorial de requisitos HL" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fef3c7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="420" y="150" width="560" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="human" value="Interfaz humana / estructura&#10;HL-02 ajuste · HL-03 cargas&#10;TBD-02 / 03" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="330" width="380" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="control" value="Asistencia / sensado / seguridad&#10;HL-04 límites · HL-05 supervisor&#10;HL-06 estado seguro · HL-09 sensores&#10;TBD-04 / 05 / 07" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="510" y="330" width="380" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="modules" value="Configuración / energía / módulos&#10;HL-01, HL-07, HL-08, HL-12–16&#10;TBD-01 / 06 / 09–12" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="970" y="330" width="380" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="model" value="Gemelo y adaptadores&#10;HL-10 modelo · HL-11 contratos&#10;TBD-07 / 08" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="260" y="640" width="380" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="trace" value="Trazabilidad / cambios&#10;HL-17 evidencia y revisiones&#10;TBD-13" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcfce7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="760" y="640" width="380" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="deriva" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="source" target="human">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="deriva" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="source" target="control">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="deriva" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="source" target="modules">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="asigna parámetros" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="human" target="model">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="asigna contratos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="control" target="model">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="traza configuración" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="modules" target="trace">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="traza revisión" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="model" target="trace">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="PROPUESTA 0.1 • Todos los HL pendientes de aprobación y verificación&#10;Azul: arquitectura • Ámbar: alcance / decisiones • Verde: evidencia requerida&#10;Fuente: concepto v3 y README; base eedebad5ea33" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1f5f9;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="860" width="1320" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="2" name="3 · Interfaces y control">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1400" pageHeight="1000">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="3 · Interfaces y control&#10;Flujo funcional propuesto; tecnologías y protocolos por definir" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e2e8f0;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="human" value="Usuario / supervisor" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="180" width="260" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cad" value="CAD paramétrico pendiente&#10;Marcos · masa · geometría" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fef3c7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="180" width="300" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="plant" value="Traje y sensores&#10;Planta física propuesta" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="420" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="policy" value="Planificación / IA&#10;Propone acciones" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="490" y="180" width="350" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="safety" value="Supervisor determinista&#10;HL-05 / 06&#10;Valida, limita y veta&#10;Estado seguro según riesgo" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="490" y="420" width="350" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="twin" value="Gemelo / adaptadores CAS&#10;HL-10 / 11" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="420" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="module" value="Módulos identificados&#10;Mecánica / energía / datos&#10;Intercambio definido" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="680" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="evidence" value="Registro de configuración y evidencia&#10;HL-17 · calibración · revisiones · eventos" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcfce7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="850" y="680" width="500" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="IF-01" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="human" target="plant">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="IF-04 propuesta" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="policy" target="safety">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="acción autorizada" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="safety" target="plant">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="estado / mediciones" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="plant" target="safety">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="IF-02" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="module" target="plant">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="IF-03" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="cad" target="twin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="IF-05" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="twin" target="evidence">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="eventos / fallos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="safety" target="evidence">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="PROPUESTA 0.1 • Todos los HL pendientes de aprobación y verificación&#10;Azul: arquitectura • Ámbar: alcance / decisiones • Verde: evidencia requerida&#10;Fuente: concepto v3 y README; base eedebad5ea33" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1f5f9;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="860" width="1320" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="3" name="4 · Verificación y madurez">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1400" pageHeight="1000">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="4 · Verificación y madurez&#10;Criterios de salida propuestos; todas las puertas pendientes de demostrar" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e2e8f0;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="g0" value="G0 · Requisitos&#10;Uso previsto + riesgos&#10;Cerrar TBD aplicables" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fef3c7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="190" width="230" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" value="G1 · CAD&#10;Paramétrico + interfaces&#10;Cargas y ajuste" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="310" y="190" width="230" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" value="G2 · CAS&#10;Simulación y fallos&#10;Correlación del modelo" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="580" y="190" width="230" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="g3" value="G3 · CAM / banco&#10;Fabricación / inspección&#10;Pruebas contra límites" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dbeafe;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="850" y="190" width="230" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="g4" value="G4 · Evaluación&#10;Evidencias revisadas&#10;Autorización específica" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcfce7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="190" width="230" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="matrix" value="Matriz de 17 requisitos HL&#10;Fuente → requisito → diseño → prueba → resultado&#10;Cada informe registra configuración y parámetros aprobados" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcfce7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="510" width="1000" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="change" value="Cambio CAD / módulo / control&#10;Analizar impacto → actualizar modelo → repetir pruebas afectadas&#10;Ninguna puerta se declara alcanzada en esta propuesta" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fef3c7;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="250" y="710" width="900" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="aprobación" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="g0" target="g1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="modelo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="g1" target="g2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="evidencia" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="g2" target="g3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="revisión" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="g3" target="g4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="HL y TBD" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="g0" target="matrix">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="informes CAS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="g2" target="matrix">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="resultado" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="g4" target="matrix">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="actualiza trazabilidad" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="change" target="matrix">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="PROPUESTA 0.1 • Todos los HL pendientes de aprobación y verificación&#10;Azul: arquitectura • Ámbar: alcance / decisiones • Verde: evidencia requerida&#10;Fuente: concepto v3 y README; base eedebad5ea33" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1f5f9;strokeColor=#475569;fontSize=16;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="860" width="1320" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

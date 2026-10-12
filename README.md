@@ -242,7 +242,7 @@ Useful integration requiring independent license review
 
 # 7. Categorized Compendium and Integration Roles
 
-This expanded catalog covers all 35 supplied entries. Links identify source projects, not implemented JFXAI4MHERS adapters. Roles below are proposed; releases, licenses, assets, APIs and hardware configurations require qualification.
+This expanded catalog covers the supplied entries and additional categorized references. Links identify source projects, not implemented JFXAI4MHERS adapters. Roles below are proposed; releases, licenses, assets, APIs and hardware configurations require qualification.
 
 ## 7.1 Humanoid platforms and embodiment references
 
@@ -263,7 +263,8 @@ Disaster-response references support civilian inspection, robustness and recover
 
 | Component and source | Proposed role | Qualification boundary |
 |---|---|---|
-| [OpenArm](https://github.com/enactic/openarm) | 7DOF arm and optional bimanual research cell | Select actual hardware, ROS 2 and simulation repositories; separate arm, gripper and cell capabilities |
+| [OpenArm — requested repository](https://github.com/sdk2035/openarm) / [upstream named in its README](https://github.com/enactic/openarm) | HARDWARE REFERENCE / OPTIONAL ADAPTER: 7DOF arm, optional bimanual research cell, teleoperation and simulation | The requested repository points to separate upstream hardware, URDF/xacro description, ROS 2, teleoperation and Isaac Lab packages; pin the selected repository/revision and qualify each package and license separately. Do not assume the requested repository itself implements all integrations |
+| [PAROL6 Desktop robot arm — requested repository](https://github.com/open-robotics-initiative/PAROL6-Desktop-robot-arm) | HARDWARE REFERENCE / OPTIONAL ADAPTER: desktop manipulation, mechanical design and simulation workcell reference | Its README links to [PAROL6 ROS 2 / MoveIt simulation](https://github.com/PCrnjak/PAROL6-ROS2-MOVEIT), separate commander software and Python API; qualify robot revision, calibration, interfaces and GPLv3 terms before integration |
 | [ROBOTIS OpenMANIPULATOR](https://github.com/ROBOTIS-GIT/open_manipulator) | Official ROS 2 manipulation platform integration | Qualify the selected robot model, distribution, drivers and simulation assets |
 | [BiDexHand](https://github.com/wengmister/BiDexHand) | Dexterous-hand hardware, calibration and pose/synergy adapter | Tendon/servo mapping, limits and sensing must match the specific revision; tactile sensing is not assumed |
 | [TidyBot++](https://github.com/jimmyyhwu/tidybot2) | Holonomic mobile-manipulation and demonstration collection profile | Base, arm and camera interfaces remain separately qualified; mobile navigation does not validate full humanoid balance |
@@ -290,6 +291,7 @@ Policy inference, task planning and controller execution are different services.
 | [Giskardpy](https://github.com/SemRoCo/giskardpy) / [current monorepo location](https://github.com/cram2/cognitive_robot_abstract_machine/tree/main/giskardpy) | Constraint/optimization-based motion control | Qualify solver dependencies and ROS integration branch; mobile-manipulator control does not automatically provide free-standing biped balance |
 | [Horizon](https://github.com/ADVRHumanoids/Horizon) | CasADi-based trajectory optimization and optimal control | Verify CasADi build, dynamics model, constraints, solver and timing; do not assume hard real-time feasibility |
 | [IAI Naive Kinematics](https://github.com/code-iai/iai_naive_kinematics_sim) | Lightweight kinematics experimentation | Reviewed instructions target ROS Melodic/Noetic; kinematic feasibility is not dynamic stability or contact validation |
+| [AR4-HMI — requested repository](https://github.com/open-robotics-initiative/ar4-hmi) | EXTERNAL / LICENSE VERIFY: AR4 six-axis joint/Cartesian control, calibration, teach/record/playback and VTK visualization reference | README declares the Annin Robotics non-commercial license; keep outside the mandatory free-software baseline. Qualify Teensy 4.1 firmware and serial interfaces; visualization is not physics simulation, and ROS 2 support is not established |
 | [Modular HHCM](https://github.com/ADVRHumanoids/modular_hhcm) | Generate URDF, SRDF and robot packages from modular configuration | Verify generated package/middleware target; a ROS 2 exporter is a qualification or implementation task, not an assumed feature |
 
 Description conversion must compare joint axes, origins, inertias, masses, limits, transmissions, collision geometry and actuator semantics. Similar rendered geometry is insufficient evidence of dynamics equivalence.
@@ -313,6 +315,9 @@ Preserve sensor timestamps, frame transforms, calibration versions and observati
 | [Multibody.jl](https://github.com/JuliaComputing/Multibody.jl) | Optional JuliaSim scientific multibody analysis | [License](https://github.com/JuliaComputing/Multibody.jl/blob/main/LICENSE) declares commercial JuliaHub terms with non-commercial academic use; not a mandatory free-software dependency |
 | [CoManRobotranSimulator — requested repository](https://github.com/sdk2035/CoManRobotranSimulator) / [origin named in its README](https://github.com/HDallali/CoManRobotranSimulator) / [separate CoMan reference](https://github.com/TimotheeHabra/coman_robotran) | Optional research adapter for CoMan multibody dynamics and controller comparison; see [integration profile](#714-comanrobotransimulator-integration-profile) | Qualify Robotran, the standalone C/C++ build and optional YARP interface. Keep repository lineages and model revisions distinct; ROS 2, learning APIs and real-time guarantees are not established |
 | [IR-SIM](https://github.com/hanruihua/ir-sim) | Lightweight navigation, control and planning experiments | Not a replacement for validated whole-body contact dynamics |
+
+
+Additional arm references (source review: 2026-10-11): [PAROL6](https://github.com/open-robotics-initiative/PAROL6-Desktop-robot-arm) and [OpenArm / sdk2035](https://github.com/sdk2035/openarm) are categorized in §7.2; [AR4-HMI](https://github.com/open-robotics-initiative/ar4-hmi) is categorized in §7.4. They are catalog references and candidates for optional integration, not installed runtime dependencies. PAROL6 points to a separate ROS 2 / MoveIt simulation repository; OpenArm points to separate robot-description and Isaac Lab packages; AR4-HMI provides control and visualization rather than a verified physics backend.
 
 MuJoCo/Gazebo remain the existing simulator-neutral baseline candidates. Specialized models should exchange scenarios and results through adapters; their internal states and solvers need not be interchangeable.
 
